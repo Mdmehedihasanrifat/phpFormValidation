@@ -1,3 +1,44 @@
+<?php
+include_once ("dbconnection.php");
+if(isset($_POST["submit"])){
+
+  $email=$_POST["email"];
+  $password=$_POST["password"];
+  $cell=$_POST["cell"];
+
+
+  if(empty($email)){
+
+      $msg="<p class='alert alert-danger'>Give your Email.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+  }
+else if(empty($password)){
+
+        $msg="<p class='alert alert-danger'>Give your password.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+    }
+
+else if(empty($cell)){
+
+       $msg="<p class='alert alert-danger'>Give your cell.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+   }
+  else{
+      $msg="<p class='alert alert-success'>Data is add <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+
+  }
+
+
+}
+
+
+?>
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,22 +65,28 @@
     <div class="card">
         <div class="card-body">
             <h2 class="text-center">Sign up</h2>
+            <?php
+
+            if(isset($msg)){
+                echo $msg;}
+            ?>
           <div class="jumbotron">
-            <form>
+            <form method="post">
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp"  class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputCell">Cell</label>
-                    <input type="text" class="form-control" id="exampleInputCell">
+                    <input type="text" name="cell" class="form-control" id="exampleInputCell">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
         </div>
