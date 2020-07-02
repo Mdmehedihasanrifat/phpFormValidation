@@ -1,10 +1,12 @@
 <?php
 include_once ("dbconnection.php");
+include_once ("function.php");
 if(isset($_POST["submit"])){
 
   $email=$_POST["email"];
   $password=$_POST["password"];
   $cell=$_POST["cell"];
+  $age=$_POST["age"];
 
 
   if(empty($email)){
@@ -23,9 +25,39 @@ else if(empty($cell)){
        $msg="<p class='alert alert-danger'>Give your cell.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
 
    }
+else if(empty($cell)){
+
+    $msg="<p class='alert alert-danger'>Give your cell.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+}
+
+
+else if(empty($age)){
+    $msg="<p class='alert alert-danger'>Give your age.Now Its empty <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+
+}
+
+
+else if(!ageValidate(40,20, $age)){
+
+    $msg="<p class='alert alert-danger'>Enter valid age<button class='close' data-dismiss='alert'>&times;</button></p>";
+
+}
+ else if(!emailvalidate($email)){
+
+     $msg="<p class='alert alert-danger'>Enter valid Email<button class='close' data-dismiss='alert'>&times;</button></p>";
+
+ }
+ else if(!checkEmail($email)){
+
+     $msg="<p class='alert alert-danger'>Enter valid Education Email <button class='close' data-dismiss='alert'>&times;</button></p>";
+
+ }
+
   else{
       $msg="<p class='alert alert-success'>Data is add <button class='close' data-dismiss='alert'>&times;</button></p>";
-
+  header('location:index.php');
 
   }
 
@@ -75,7 +107,7 @@ else if(empty($cell)){
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" name="email"  value="<?php old("email");?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     <small id="emailHelp"  class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
@@ -84,7 +116,13 @@ else if(empty($cell)){
                 </div>
                 <div class="form-group">
                     <label for="exampleInputCell">Cell</label>
-                    <input type="text" name="cell" class="form-control" id="exampleInputCell">
+                    <input type="text" value="<?php old("cell");?>" name="cell" class="form-control" id="exampleInputCell">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleInputCell">age</label>
+                    <input type="number" value="<?php old("age");?>" name="age" class="form-control" id="exampleInputCell">
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
